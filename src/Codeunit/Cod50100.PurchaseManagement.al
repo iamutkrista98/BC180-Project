@@ -1,3 +1,4 @@
+//codeunit for posting
 codeunit 50100 "Purchase Management"
 {
     procedure PostPurchToPostedPurch(PurchCode: Code[20])
