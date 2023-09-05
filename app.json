@@ -1,0 +1,28 @@
+{
+  "id": "26a23cfe-3cd4-43c2-8166-87fff7f6e0a8",
+  "name": "BC180 Project",
+  "publisher": "Agile Solutions Pvt. Ltd.",
+  "version": "1.0.0.0",
+  "brief": "",
+  "description": "",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "logo.png",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "14.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50149
+    }
+  ],
+  "showMyCode": false,
+  "runtime": "3.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
