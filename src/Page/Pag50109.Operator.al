@@ -91,6 +91,45 @@ page 50109 Operator
                     Message('The date is %1', StartDate + 33);
                 end;
             }
+            action(CalculateTotal)
+            {
+                Caption = 'Calculate Total';
+                Image = Totals;
+                Promoted = true;
+                ApplicationArea = All;
+                trigger OnAction()
+                var
+                    PSL: Record "Posted Sale Line";
+                    trs: Decimal;
+                    rdate: Date;
+                begin
+                    rdate := CalcDate('<1Y+1M+1D>', StartDate);
+                    Message('The new date is: %1', rdate);
+
+
+                end;
+            }
+            action(FindingLast)
+            {
+                ApplicationArea = All;
+                Image = Find;
+                Promoted = true;
+
+                trigger OnAction()
+                var
+                    Cust: Record Customer;
+                begin
+                    Cust.SetFilter(Cust."Location Code", 'YELLOW');
+                    Cust.SetFilter(Cust.Name, '@R*');
+                    if Cust.FindLast() then
+                        Message('The name is: %1 and Address is: %2', Cust.Name, Cust.Address)
+                    else
+                        Message('No Such Record Found!');
+
+
+
+                end;
+            }
         }
     }
 

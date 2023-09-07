@@ -6,6 +6,7 @@ page 50100 "Header List"
     SourceTable = "Header Table";
     UsageCategory = Lists;
     CardPageId = "Header Card";
+    ShowFilter = true;
 
     layout
     {

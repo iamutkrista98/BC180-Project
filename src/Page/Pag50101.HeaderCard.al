@@ -21,12 +21,17 @@ page 50101 "Header Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Customer No. field.';
+
+
+
                 }
                 field("Customer Name"; Rec."Customer Name")
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Customer Name field.';
+                    ShowMandatory = Rec."Customer No." = '';
                 }
+
                 field("Customer Address"; Rec."Customer Address")
                 {
                     ApplicationArea = All;
