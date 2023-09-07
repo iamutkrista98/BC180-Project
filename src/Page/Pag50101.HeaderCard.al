@@ -84,7 +84,7 @@ page 50101 "Header Card"
                 begin
                     if Confirm('Are you sure you want to post?', true) then begin
                         PurchMgt.PostPurchToPostedPurch(Rec."No.");
-                        Message('Posted Successfully');
+                        Message('Posted Successfully, Posting Action Run By: %1', UserId);
 
                     end
 

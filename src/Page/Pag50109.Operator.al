@@ -80,6 +80,17 @@ page 50109 Operator
                 end;
 
             }
+            action(DateAddition)
+            {
+                Caption = 'Date Addition';
+                Image = Calendar;
+                ApplicationArea = All;
+                Promoted = true;
+                trigger OnAction()
+                begin
+                    Message('The date is %1', StartDate + 33);
+                end;
+            }
         }
     }
 
