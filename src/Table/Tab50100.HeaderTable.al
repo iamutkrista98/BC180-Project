@@ -2,6 +2,8 @@ table 50100 "Header Table"
 {
     Caption = 'Header Table';
     DataClassification = ToBeClassified;
+    DrillDownPageId = "Header List";
+    LookupPageId = "Header List";
 
     fields
     {
@@ -105,8 +107,8 @@ table 50100 "Header Table"
             SalesSetup.Get();
             SalesSetup.TestField(SalesSetup.salenoseries);
             Clear(NoSerMgt);
+            //NoSerMgt.InitSeries(SalesSetup.salenoseries, xRec.saleno, 0D, "No.", Rec.saleno);
             NoSerMgt.InitSeries(SalesSetup.salenoseries, xRec.saleno, 0D, "No.", Rec.saleno);
-
         end;
 
     end;

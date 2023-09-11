@@ -10,7 +10,7 @@ report 50101 "Internal Sales Report"
         dataitem("Sales Shipment Header"; "Sales Shipment Header")
         {
             PrintOnlyIfDetail = true;
-            RequestFilterFields = "No.";
+            RequestFilterFields = "Order No.";
             column(Sell_to_Customer_No_; "Sell-to Customer No.")
             {
 
@@ -47,7 +47,7 @@ report 50101 "Internal Sales Report"
 
             dataitem("Sales Invoice Line"; "Sales Invoice Line")
             {
-                DataItemLink = "Document No." = field("No.");
+                DataItemLink = "Order No." = field("Order No.");
                 DataItemLinkReference = "Sales Shipment Header";
                 // DataItemTableView = sorting("Document No.", "Location Code");
 
@@ -88,6 +88,8 @@ report 50101 "Internal Sales Report"
                 sno := 0;
                 CompInfo.Get();
                 CompInfo.CalcFields(Picture);
+                if "Order No." = '' then
+                    CurrReport.Skip();
             end;
 
             trigger OnAfterGetRecord()

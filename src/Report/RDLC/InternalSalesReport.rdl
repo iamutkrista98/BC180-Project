@@ -696,6 +696,7 @@
                             </Border>
                           </Style>
                         </Rectangle>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -712,7 +713,7 @@
                 <TablixMember>
                   <Group Name="Details">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!Order_No_.Value</GroupExpression>
+                      <GroupExpression>=Fields!Sell_to_Customer_No_.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                 </TablixMember>
