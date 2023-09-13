@@ -64,6 +64,7 @@
                                                   <TextRun>
                                                     <Value>Item No </Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -96,6 +97,7 @@
                                                   <TextRun>
                                                     <Value>Type</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -128,6 +130,7 @@
                                                   <TextRun>
                                                     <Value>Description</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -160,6 +163,7 @@
                                                   <TextRun>
                                                     <Value>Quantity</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -192,6 +196,7 @@
                                                   <TextRun>
                                                     <Value>Line Total</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -268,7 +273,9 @@
                                                 <TextRuns>
                                                   <TextRun>
                                                     <Value>=Fields!Item_No_.Value</Value>
-                                                    <Style />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                    </Style>
                                                   </TextRun>
                                                 </TextRuns>
                                                 <Style />
@@ -298,7 +305,9 @@
                                                 <TextRuns>
                                                   <TextRun>
                                                     <Value>=Fields!Type.Value</Value>
-                                                    <Style />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                    </Style>
                                                   </TextRun>
                                                 </TextRuns>
                                                 <Style />
@@ -328,7 +337,9 @@
                                                 <TextRuns>
                                                   <TextRun>
                                                     <Value>=Fields!Description.Value</Value>
-                                                    <Style />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                    </Style>
                                                   </TextRun>
                                                 </TextRuns>
                                                 <Style />
@@ -358,7 +369,9 @@
                                                 <TextRuns>
                                                   <TextRun>
                                                     <Value>=Fields!Quantity.Value</Value>
-                                                    <Style />
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                    </Style>
                                                   </TextRun>
                                                 </TextRuns>
                                                 <Style />
@@ -389,6 +402,7 @@
                                                   <TextRun>
                                                     <Value>=Fields!Line_Total.Value</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <Format>#,0.00 '$';(#,0.00 '$');'-'</Format>
                                                       <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
                                                     </Style>
@@ -533,6 +547,7 @@
                                                   <TextRun>
                                                     <Value>Amount in Words:</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -567,6 +582,7 @@
                                                   <TextRun>
                                                     <Value>=Code.ConvertNumToWord(Sum(Fields!Line_Total.Value))</Value>
                                                     <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
                                                       <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
@@ -619,6 +635,7 @@
                                                 <TextRun>
                                                   <Value>Sno.</Value>
                                                   <Style>
+                                                    <FontFamily>Segoe UI</FontFamily>
                                                     <FontWeight>Bold</FontWeight>
                                                   </Style>
                                                 </TextRun>
@@ -705,7 +722,9 @@
                                               <TextRuns>
                                                 <TextRun>
                                                   <Value>=Fields!serialno.Value</Value>
-                                                  <Style />
+                                                  <Style>
+                                                    <FontFamily>Segoe UI</FontFamily>
+                                                  </Style>
                                                 </TextRun>
                                               </TextRuns>
                                               <Style />
@@ -738,7 +757,9 @@
                                                   <TextRuns>
                                                     <TextRun>
                                                       <Value>=Fields!No_.Value</Value>
-                                                      <Style />
+                                                      <Style>
+                                                        <FontFamily>Segoe UI</FontFamily>
+                                                      </Style>
                                                     </TextRun>
                                                   </TextRuns>
                                                   <Style />
@@ -825,7 +846,9 @@
                                   <TextRuns>
                                     <TextRun>
                                       <Value>=Fields!Customer_No_.Value</Value>
-                                      <Style />
+                                      <Style>
+                                        <FontFamily>Segoe UI</FontFamily>
+                                      </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
@@ -854,7 +877,9 @@
                                   <TextRuns>
                                     <TextRun>
                                       <Value>=Fields!Customer_Name.Value</Value>
-                                      <Style />
+                                      <Style>
+                                        <FontFamily>Segoe UI</FontFamily>
+                                      </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
@@ -884,7 +909,9 @@
                                   <TextRuns>
                                     <TextRun>
                                       <Value>=Fields!Customer_Address.Value</Value>
-                                      <Style />
+                                      <Style>
+                                        <FontFamily>Segoe UI</FontFamily>
+                                      </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
@@ -971,6 +998,7 @@
                   <TextRun>
                     <Value>=Fields!CompName.Value</Value>
                     <Style>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1005,6 +1033,7 @@
                   <TextRun>
                     <Value>=Fields!CompAddress.Value</Value>
                     <Style>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>

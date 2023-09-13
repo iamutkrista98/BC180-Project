@@ -10,6 +10,7 @@ page 50101 "Header Card"
         {
             group(General)
             {
+                Visible = Visibility;
                 Caption = 'General';
 
                 field("No."; Rec."No.")
@@ -102,4 +103,16 @@ page 50101 "Header Card"
             }
         }
     }
+
+    var
+        Visibility: Boolean;
+
+
+    trigger OnOpenPage()
+    begin
+        if CompanyName = 'Utkrista' then
+            Visibility := True
+        else
+            Visibility := False;
+    end;
 }
