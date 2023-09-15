@@ -12,6 +12,7 @@ pageextension 50102 GeneralJournalExt extends "General Journal"
             {
                 ApplicationArea = All;
             }
+
         }
     }
 }

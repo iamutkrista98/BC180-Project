@@ -6,6 +6,31 @@ page 50109 Operator
     ApplicationArea = All;
 
 
+
+    layout
+    {
+        area(Content)
+        {
+            group("TestVisibility")
+            {
+                Visible = Visibility;
+
+                field(field1; field1)
+                {
+                    ApplicationArea = All;
+
+                }
+                field(field2; field2)
+                {
+                    ApplicationArea = All;
+
+                }
+
+            }
+        }
+    }
+
+
     actions
     {
         area(Processing)
@@ -130,6 +155,36 @@ page 50109 Operator
 
                 end;
             }
+            action(MakeVisibile)
+            {
+                ApplicationArea = All;
+                Image = Find;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                begin
+                    Visibility := True;
+                end;
+            }
+            action(GetUser)
+            {
+                ApplicationArea = All;
+                Image = GetEntries;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    UserSetup: Record "User Setup";
+                begin
+                    if UserSetup.Get(UserId) then
+                        Message('The current user is: %1', UserId)
+                    else
+                        Message('Some Unexpected Error Getting The Current User!');
+
+                end;
+            }
         }
     }
 
@@ -139,10 +194,16 @@ page 50109 Operator
         BillToCust: Code[20];
         OriginalBalance: Decimal;
 
+        field1: Code[20];
+        field2: Code[20];
+        Visibility: Boolean;
+
     trigger OnOpenPage()
     begin
         StartDate := 20230101D;
         BillToCust := '10000';
+        Visibility := False;
+
     end;
 
 

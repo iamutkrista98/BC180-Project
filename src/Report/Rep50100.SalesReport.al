@@ -3,9 +3,12 @@ report 50100 "Sales Report "
     ApplicationArea = All;
     Caption = 'Sales Report ';
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = RDLC;
+    // DefaultLayout = RDLC;
+    // PreviewMode = PrintLayout;
+    // RDLCLayout = 'src/Report/RDLC/SalesReport.rdl';
+    ProcessingOnly = true;
     PreviewMode = PrintLayout;
-    RDLCLayout = 'src/Report/RDLC/SalesReport.rdl';
+    DefaultLayout = RDLC;
 
     dataset
     {
@@ -98,6 +101,35 @@ report 50100 "Sales Report "
 
 
         }
+        dataitem(Integer; Integer)
+        {
+            DataItemTableView = where(Number = const(1));
+            trigger OnAfterGetRecord()
+            var
+                PostedSaleHdr: Record "Posted Sale Header";
+                PostedSaleLine: Record "Posted Sale Line";
+                Cust: Record Customer;
+
+            begin
+                if PSaleHdr = '' then
+                    Error('Enter the doc you want to update');
+                PostedSaleHdr.Reset();
+                PostedSaleHdr.SetRange("No.", PSaleHdr);
+                if PostedSaleHdr.FindFirst() then begin
+                    if CustNo <> '' then begin
+                        PostedSaleHdr.SetRange("Customer No.", CustNo);
+                        if Cust.Get(CustNo) then begin
+                            PostedSaleHdr."Customer Name" := Cust.Name;
+                            PostedSaleHdr."Customer No." := Cust."No.";
+                            "PostedSaleHdr"."Customer Address" := Cust.Address;
+                        end;
+                    end;
+                    PostedSaleHdr.Modify();
+                end;
+                Message('Done');
+
+            end;
+        }
     }
     requestpage
     {
@@ -112,6 +144,11 @@ report 50100 "Sales Report "
                     {
                         TableRelation = Customer."No.";
                         ApplicationArea = All;
+                    }
+                    field(PSaleHdr; PSaleHdr)
+                    {
+                        ApplicationArea = All;
+                        TableRelation = "Posted Sale Header";
                     }
                 }
             }
@@ -128,4 +165,5 @@ report 50100 "Sales Report "
         CustNo: Code[20];
         serialno: Integer;
         CompInfo: Record "Company Information";
+        PSaleHdr: Code[20];
 }

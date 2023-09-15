@@ -53,6 +53,8 @@ page 50101 "Header Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Member Type field.';
                 }
+
+
             }
             group("Sales Line")
             {
@@ -97,8 +99,22 @@ page 50101 "Header Card"
                     else
                         Error('Posting Process Cancelled by End User!');
 
-
                 end;
+
+            }
+            action(MakeVisible)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = New;
+                Image = ShowList;
+
+                trigger OnAction()
+                begin
+                    Visibility := True;
+                end;
+
 
             }
         }
@@ -108,11 +124,18 @@ page 50101 "Header Card"
         Visibility: Boolean;
 
 
+        field1: Code[20];
+        field2: Code[20];
+
+
     trigger OnOpenPage()
     begin
-        if CompanyName = 'Utkrista' then
-            Visibility := True
-        else
-            Visibility := False;
+        // if CompanyName = 'Utkrista' then
+        //     Visibility := True
+        // else
+        //     Visibility := False;
+        Visibility := False;
     end;
+
+
 }
