@@ -80,7 +80,6 @@ page 50104 "Posted Sales Header Card"
                     PostedHdr.SetRange("No.", Rec."No.");
                     if PostedHdr.FindFirst() then
                         Report.Run(Report::"Sales Report ", true, true, PostedHdr);
-
                 end;
             }
         }

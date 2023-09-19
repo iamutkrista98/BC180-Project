@@ -4,9 +4,6 @@ page 50109 Operator
     PageType = Card;
     UsageCategory = Administration;
     ApplicationArea = All;
-
-
-
     layout
     {
         area(Content)
@@ -24,6 +21,11 @@ page 50109 Operator
                 {
                     ApplicationArea = All;
 
+                }
+                field(field3; field3)
+                {
+                    ApplicationArea = All;
+                    ShowMandatory = true;
                 }
 
             }
@@ -179,16 +181,13 @@ page 50109 Operator
                     UserSetup: Record "User Setup";
                 begin
                     if UserSetup.Get(UserId) then
-                        Message('The current user is: %1', UserId)
+                        Message('The current user is: %1 and you have the permission status %2', UserId, UserSetup."Allow Posting Permission")
                     else
                         Message('Some Unexpected Error Getting The Current User!');
-
                 end;
             }
         }
     }
-
-
     var
         StartDate: Date;
         BillToCust: Code[20];
@@ -197,14 +196,12 @@ page 50109 Operator
         field1: Code[20];
         field2: Code[20];
         Visibility: Boolean;
+        field3: Text[10];
 
     trigger OnOpenPage()
     begin
         StartDate := 20230101D;
         BillToCust := '10000';
         Visibility := False;
-
     end;
-
-
 }

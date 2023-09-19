@@ -61,6 +61,8 @@ codeunit 50100 "Purchase Management"
     var
         SaleLedger: Record "Sale Ledger Entries";
         vatTotal: Decimal;
+        Itm: Record Item;
+
 
     begin
         SaleLedger.Init();
@@ -76,5 +78,11 @@ codeunit 50100 "Purchase Management"
         CalculateVatTotal(vatTotal, SaleLine."Line Total");
         SaleLedger."Total Inc. VAT" := vatTotal;
         SaleLedger.Insert(true);
+        if Itm.Get(SaleLine."Item No.") then begin
+            Itm.Inventory -= SaleLine.Quantity;
+            Itm.Modify();
+
+        end;
+
     end;
 }

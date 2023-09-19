@@ -34,7 +34,6 @@ table 50100 "Header Table"
                 if Cust.Get("Customer No.") then begin
                     "Customer Name" := Cust.Name;
                     "Customer Address" := Cust.Address;
-
                 end;
             end;
         }
