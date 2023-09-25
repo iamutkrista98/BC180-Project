@@ -8,6 +8,14 @@ pageextension 50101 "User Setup Ext" extends "User Setup"
             {
                 ApplicationArea = All;
             }
+            field("Journal Template Name"; Rec."Journal Template Name")
+            {
+                ApplicationArea = All;
+            }
+            field("Journal Batch Name"; Rec."Journal Batch Name")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }
