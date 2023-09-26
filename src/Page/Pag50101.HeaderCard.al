@@ -93,6 +93,7 @@ page 50101 "Header Card"
                     if Confirm('Are you sure you want to post?', true) then begin
                         PurchMgt.PostPurchToPostedPurch(Rec."No.");
                         Message('Posted Successfully, Posting Action Run By: %1', UserId);
+                        CurrPage.Close();
 
                     end
 
@@ -116,6 +117,54 @@ page 50101 "Header Card"
                 end;
 
 
+            }
+            action(CalcSum)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = New;
+                Image = Totals;
+                trigger OnAction()
+                var
+                    SaleLine: Record "Sale Line";
+                    sumamt: Decimal;
+                begin
+                    SaleLine.Reset();
+                    sumamt := 0;
+                    SaleLine.SetRange("Document No.", Rec."No.");
+                    if SaleLine.FindSet() then
+                        repeat
+                            sumamt += SaleLine."Line Total";
+                        until SaleLine.Next() = 0;
+                    Message('The total sum is %1', sumamt);
+
+
+
+                end;
+            }
+            action(CalculateSalesAmount)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = New;
+                PromotedIsBig = true;
+                trigger OnAction()
+                var
+                    PostedSaleHdr: Record "Posted Sale Header";
+                    tot: Decimal;
+                begin
+                    PostedSaleHdr.Reset();
+                    PostedSaleHdr.SetRange("Member Type", "Member Type"::Gold);
+                    PostedSaleHdr.SetFilter("Customer No.", '%1', '01445544');
+                    if PostedSaleHdr.FindSet() then
+                        repeat
+                            tot += PostedSaleHdr."Total Amount";
+                        until PostedSaleHdr.Next() = 0;
+                    Message('The total of gold member is %1', tot);
+
+
+                end;
             }
         }
     }

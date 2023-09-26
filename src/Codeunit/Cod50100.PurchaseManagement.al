@@ -14,7 +14,7 @@ codeunit 50100 "Purchase Management"
         if checkUserPermission(UserId) = false then
             Error('You lack the privileges for the current action!');
         if SaleHdr.Get(PurchCode) then begin
-            SaleHdr.TestField("Customer No.");
+            SaleHdr.TestField("Customer Name");
             if (SaleHdr."Member Type" = SaleHdr."Member Type"::Bronze) then
                 Error('Bronze Member Record Can''t be posted!');
             PostedSaleHdr.Init();
@@ -34,6 +34,11 @@ codeunit 50100 "Purchase Management"
             PostedSaleHdr.Modify();
             SaleLine.DeleteAll();
             SaleHdr.Delete();
+            if not Confirm('Would you like to open the posted sales document?', false) then
+                exit;
+            Page.Run(Page::"Posted Sales Header Card", PostedSaleHdr);
+
+
         end;
 
 
@@ -62,6 +67,8 @@ codeunit 50100 "Purchase Management"
         SaleLedger: Record "Sale Ledger Entries";
         vatTotal: Decimal;
         Itm: Record Item;
+        Line: Record "Gen. Journal Line";
+        GenJnlPost: Codeunit "Gen. Jnl.-Post Line";
 
 
     begin
@@ -78,11 +85,21 @@ codeunit 50100 "Purchase Management"
         CalculateVatTotal(vatTotal, SaleLine."Line Total");
         SaleLedger."Total Inc. VAT" := vatTotal;
         SaleLedger.Insert(true);
-        if Itm.Get(SaleLine."Item No.") then begin
-            Itm.Inventory -= SaleLine.Quantity;
-            Itm.Modify();
+        Line.Init();
+        Line."Posting Date" := Today;
+        Line."Document Type" := Line."Document Type"::" ";
+        Line."Document No." := SaleLine."Document No.";
+        Line."Account Type" := Line."Account Type"::Customer;
+        Line.Validate("Account No.", '10000');
+        Line.Amount := SaleLine."Line Total";
+        Line."Bal. Account Type" := Line."Bal. Account Type"::"G/L Account";
+        Line.Validate("Bal. Account No.", '2910');
+        Line.Training := 'Training';
+        GenJnlPost.RunWithCheck(Line);
 
-        end;
+
+
+
 
     end;
 }

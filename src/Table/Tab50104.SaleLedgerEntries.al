@@ -35,6 +35,12 @@ table 50104 "Sale Ledger Entries"
 
 
         }
+        field(8; Inventory; Decimal)
+        {
+            // FieldClass = FlowField;
+            // CalcFormula = sum("Posted Sale Line".Quantity where("Item No." = field("Item No.")));
+
+        }
     }
     keys
     {

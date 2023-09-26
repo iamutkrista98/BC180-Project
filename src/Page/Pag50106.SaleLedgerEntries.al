@@ -48,6 +48,10 @@ page 50106 "Sale Ledger Entries"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Type field.';
                 }
+                field(Inventory; Rec.Inventory)
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

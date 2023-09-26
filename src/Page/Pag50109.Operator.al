@@ -186,6 +186,27 @@ page 50109 Operator
                         Message('Some Unexpected Error Getting The Current User!');
                 end;
             }
+            action(GenerateNumber)
+            {
+                ApplicationArea = All;
+                Image = GeneralPostingSetup;
+                Promoted = true;
+                PromotedCategory = New;
+                PromotedIsBig = true;
+                trigger OnAction()
+                var
+                    I: Integer;
+                    F: Integer;
+                    Lab: Label 'The factorial is %1';
+                begin
+                    F := 1;
+                    for I := 1 to 5 do begin
+                        F := F * I;
+                    end;
+                    Message(Lab, F);
+
+                end;
+            }
         }
     }
     var

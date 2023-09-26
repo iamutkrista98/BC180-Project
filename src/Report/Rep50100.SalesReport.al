@@ -133,7 +133,6 @@ report 50100 "Sales Report "
     }
     requestpage
     {
-        SaveValues = true;
         layout
         {
             area(content)
