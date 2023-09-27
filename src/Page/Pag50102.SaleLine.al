@@ -30,6 +30,29 @@ page 50102 "Sale Line"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Item No. field.';
+
+                    trigger OnLookup(var Text: Text): Boolean
+                    var
+                        ItemRec: Record Item;
+                        GLRec: Record "G/L Account";
+                    begin
+                        case Rec.Type of
+                            Rec.Type::GL:
+                                if Page.RunModal(Page::"G/L Account List", GLRec) = Action::LookupOK then begin
+                                    Rec."Item No." := GLRec."No.";
+                                    Rec.Description := GLRec.Name;
+
+                                end;
+
+                            Rec.Type::Item:
+                                if Page.RunModal(Page::"Item List", ItemRec) = Action::LookupOK then begin
+                                    Rec."Item No." := ItemRec."No.";
+                                    Rec.Description := ItemRec.Description;
+                                end;
+                        end;
+                    end;
+
+
                 }
                 field(Description; Rec.Description)
                 {
@@ -45,6 +68,14 @@ page 50102 "Sale Line"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Quantity field.';
+                    trigger OnLookup(var Text: Text): Boolean
+                    var
+                        ItemRec: Record Item;
+                    begin
+                        ItemRec.Reset();
+                        if Page.RunModal(Page::"Item List", ItemRec) = Action::LookupOK then
+                            Rec.Quantity := ItemRec.Inventory;
+                    end;
                 }
                 field("Line Total"; Rec."Line Total")
                 {

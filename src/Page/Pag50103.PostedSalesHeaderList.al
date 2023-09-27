@@ -52,4 +52,11 @@ page 50103 "Posted Sales Header List"
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        Rec.FilterGroup(2);
+        Rec.SetRange("Member Type", Rec."Member Type"::Gold);
+        Rec.FilterGroup(0);
+    end;
 }
