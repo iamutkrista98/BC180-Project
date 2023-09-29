@@ -68,7 +68,12 @@ codeunit 50100 "Purchase Management"
         vatTotal: Decimal;
         Itm: Record Item;
         Line: Record "Gen. Journal Line";
+        GJLine: Record "Gen. Journal Line";
         GenJnlPost: Codeunit "Gen. Jnl.-Post Line";
+        lineNo: Integer;
+        GLSetup: Record "General Ledger Setup";
+        custNo: Code[20];
+
 
 
     begin
@@ -85,21 +90,67 @@ codeunit 50100 "Purchase Management"
         CalculateVatTotal(vatTotal, SaleLine."Line Total");
         SaleLedger."Total Inc. VAT" := vatTotal;
         SaleLedger.Insert(true);
+        GLSetup.Get();
+        lineNo := 0;
+
+
+        GJLine.Reset();
+        GJLine.SetRange("Journal Template Name", GLSetup."Cust Jnl Template");
+        GJLine.SetRange("Journal Batch Name", GLSetup."Cust Jnl Batch");
+        if GJLine.FindLast() then
+            lineNo := GJLine."Line No." + 10000
+        else
+            lineNo := 10000;
+
+        //debit line
         Line.Init();
-        Line."Posting Date" := Today;
-        Line."Document Type" := Line."Document Type"::" ";
-        Line."Document No." := SaleLine."Document No.";
-        Line."Account Type" := Line."Account Type"::Customer;
-        Line.Validate("Account No.", '10000');
-        Line.Amount := SaleLine."Line Total";
-        Line."Bal. Account Type" := Line."Bal. Account Type"::"G/L Account";
-        Line.Validate("Bal. Account No.", '2910');
+        Line.Validate("Line No.", lineNo);
+        Line.Validate(Line."Journal Template Name", GLSetup."Cust Jnl Template");
+        Line.Validate(Line."Journal Batch Name", GLSetup."Cust Jnl Batch");
+        Line.Validate("Posting Date", Today);
+        Line.Validate("Document No.", SaleLedger."Document No");
+        getCustomerNoFromSaleLedger(SaleLedger."Document No", custNo);
+        Line.Validate("Account Type", Line."Account Type"::Customer);
+        Line.Validate("Account No.", custNo);
+        Line.Validate(Amount, SaleLine."Line Total");
         Line.Training := 'Training';
+        Line.Insert(true);
+        GenJnlPost.RunWithCheck(Line);
+
+        //credit line
+        Line.Init();
+        Line.Validate("Line No.", lineNo + 10000);
+        Line.Validate(Line."Journal Template Name", GLSetup."Cust Jnl Template");
+        Line.Validate(Line."Journal Batch Name", GLSetup."Cust Jnl Batch");
+        Line.Validate("Posting Date", Today);
+        Line.Validate("Document No.", SaleLedger."Document No");
+        Line.Validate("Account Type", Line."Account Type"::"G/L Account");
+        Line.Validate("Account No.", GLSetup."Cust Bal Account No.");
+        Line.Validate(Amount, -SaleLine."Line Total");
+        Line.Training := 'Training';
+        Line.Insert(true);
         GenJnlPost.RunWithCheck(Line);
 
 
+        // Line.Init();
+        // Line.Validate("Line No.", lineNo + 10000);
+        // Line.Validate("Posting Date", Today);
+        // Line.Validate("Document Type", Line."Document Type"::" ");
+        // Line.Validate("Document No.", SaleLine."Document No.");
+        // Line.Validate("Account Type", Line."Account Type"::"G/L Account");
+        // Line.Validate("Account No.", GLSetup."Cust Bal Account No.");
+        // Line.Validate(Amount, -SaleLine."Line Total");
+        // Line.Insert(true);
+        // Line.Training := 'Training';
 
 
+    end;
 
+    local procedure getCustomerNoFromSaleLedger(DocumentNo: Code[20]; var CustNo: Code[20])
+    var
+        SaleHdr: Record "Header Table";
+    begin
+        if SaleHdr.Get(DocumentNo) then
+            CustNo := SaleHdr."Customer No.";
     end;
 }

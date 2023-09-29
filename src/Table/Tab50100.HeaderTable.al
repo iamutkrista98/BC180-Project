@@ -34,7 +34,12 @@ table 50100 "Header Table"
                 if Cust.Get("Customer No.") then begin
                     "Customer Name" := Cust.Name;
                     "Customer Address" := Cust.Address;
+                end
+                else begin
+                    "Customer Name" := '';
+                    "Customer Address" := '';
                 end;
+
             end;
         }
         field(3; "Customer Name"; Text[100])
